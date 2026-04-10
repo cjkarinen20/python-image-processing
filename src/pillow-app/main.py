@@ -1,5 +1,5 @@
 import os
-from PIL import Image
+from PIL import Image, ImageEnhance
 
 
 # Get the path of the images directory
@@ -26,7 +26,7 @@ images_dir = os.path.dirname(__file__)
 # # Show the image
 # image.show()
 
-# # Exercise 
+# Image Exercise 
 # cat_rotated = image.rotate(30)
 # cat_rotated.save('cat_rotated.png', 'png')
 
@@ -49,10 +49,22 @@ image = Image.open(images_path)
 # image.putpixel((0, 0), (255, 0, 0))
 # image.show()
 
-# Exercise 
-print(image.getpizel((0,0)))
-for x in range(image.size[0]):
-    for y in range(image.size[1]):
-        if image.getpixel((x, y))[0] == 0:
-            image.putpixel((x, y), (200, 20, 20))
+# Color Exercise 
+# print(image.getpizel((0,0)))
+# for x in range(image.size[0]):
+#     for y in range(image.size[1]):
+#         if image.getpixel((x, y))[0] == 0:
+#             image.putpixel((x, y), (200, 20, 20))
+
+# Create an image enhancer
+vibrance_enhancer = ImageEnhance.Color(image)
+contrast_enhancer = ImageEnhance.Contrast(image)
+brightness_enhancer = ImageEnhance.Brightness(image)
+sharpness_enhancer = ImageEnhance.Sharpness(image)
+
+# Apply the enhancer
+enhanced_image = sharpness_enhancer.enhance(1.5)
+
+# Display the image
 image.show()
+enhanced_image.show()
