@@ -1,5 +1,5 @@
 import os
-from PIL import Image, ImageEnhance, ImageFilter
+from PIL import Image, ImageEnhance, ImageFilter, ImageOps
 
 
 # Get the path of the images directory
@@ -75,19 +75,38 @@ images_dir = os.path.dirname(__file__)
 # enhanced_image.show()
 
 # -- Image Filters --
-images_path = os.path.join(images_dir, 'images', 'cat.jpg')
+# images_path = os.path.join(images_dir, 'images', 'cat.jpg')
 
-image = Image.open(images_path)
+# image = Image.open(images_path)
 
-# Apply basic image filters
-image_blur = image.filter(ImageFilter.BLUR)
-image_contour = image.filter(ImageFilter.CONTOUR)
-image_emboss = image.filter(ImageFilter.EMBOSS)
-image_edge = image.filter(ImageFilter.FIND_EDGES)
+# # Apply basic image filters
+# image_blur = image.filter(ImageFilter.BLUR)
+# image_contour = image.filter(ImageFilter.CONTOUR)
+# image_emboss = image.filter(ImageFilter.EMBOSS)
+# image_edge = image.filter(ImageFilter.FIND_EDGES)
 
-# Apply advanced image filters
-image_boxblur = image.filter(ImageFilter.BoxBlur(radius = 20))
-image_gaussianblur = image.filter(ImageFilter.GuassianBlur(radius = 20))
-image_unsharp = image.filter(ImageFilter.UnsharpMask(radius = 20))
+# # Apply advanced image filters
+# image_boxblur = image.filter(ImageFilter.BoxBlur(radius = 20))
+# image_gaussianblur = image.filter(ImageFilter.GuassianBlur(radius = 20))
+# image_unsharp = image.filter(ImageFilter.UnsharpMask(radius = 20))
 
-image_unsharp.show()
+# image_unsharp.show()
+
+# -- Pillow Image Operations --
+
+# Create an image
+image = Image.open('dog.jpg')
+
+# Position changes
+image_mirror = ImageOps.mirror(image)
+# image_scale = ImageOps.scale(image, 0.5)
+
+# Color Changes
+image_inverted = ImageOps.invert(image_mirror)
+
+# Add and remove
+image_border = ImageOps.expand(image = image, border = 50, fill = (255, 255, 255))
+image_padded = ImageOps.pad(image, (4000, 6000))
+image_crop = ImageOps.crop(image = image, border = 200)
+
+image_inverted.show()
